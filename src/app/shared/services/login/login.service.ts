@@ -35,13 +35,18 @@ export class LoginService {
 
     return this.http.post<Login>(`${environment.authProvider}login`,{},header)
     .pipe(map(data => {
-      const usuarioEntityModel: Login = data;
-      usuarioEntityModel.id = login;
-
-      console.log('Authenticated: ', data);
-      localStorage.setItem('authenticated', JSON.stringify(usuarioEntityModel));
-      this.loginSubject.next(usuarioEntityModel);
-      return data;
+      if(data.success){
+        const usuarioEntityModel: Login = data;
+        usuarioEntityModel.id = login;
+  
+        console.log('Authenticated: ', data);
+        localStorage.setItem('authenticated', JSON.stringify(usuarioEntityModel));
+        this.loginSubject.next(usuarioEntityModel);
+        return data;
+      }
+      
+      throw new Error("Authentication failed");
+      
     }));
   }
 

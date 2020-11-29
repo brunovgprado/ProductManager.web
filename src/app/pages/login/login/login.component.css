@@ -1,0 +1,10 @@
+.btn-login {
+    width: 150px;
+}
+
+.login-header {
+    height: 80px;
+    border-bottom: 3px #fdc400 solid;
+    background: rgb(14,47,169);
+    background: linear-gradient(352deg, rgba(14,47,169,1) 30%, rgba(12,85,154,1) 100%);
+}
