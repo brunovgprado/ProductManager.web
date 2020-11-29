@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  nomeAplicativo: 'Product Manager',
+  authProvider: 'https://dev.sitemercado.com.br/api/',
+  production: false,
+  version: '1.0.0.0',
 };
 
 /*
