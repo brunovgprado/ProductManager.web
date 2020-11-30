@@ -1,0 +1,41 @@
+
+<div class="product-form mx-auto m-5">
+    <div class="row col-10 mx-auto">
+        <div class="col text-center">
+            <h4 class="font-weight-bold">{{pageTitle}}</h4>
+            <p>Informe abaixo os dados do produto</p>
+        </div>
+    </div>
+    <form  [formGroup]="productForm" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <input type="text" formControlName="productname" placeholder="Nome do produto" class="form-control" 
+                    [ngClass]="{ 'is-invalid': submitted && productData.productname.errors }" />
+                <div *ngIf="submitted && productData.productname.errors" class="invalid-feedback">
+                    <div *ngIf="productData.productname.errors.required">Digite o nome do produto</div>
+                </div>
+            </div>
+            <div class="form-group col-md-12">
+                <input type="text" formControlName="productsaleprice" placeholder="Valor de venda" class="form-control" 
+                    [ngClass]="{ 'is-invalid': submitted && productData.productsaleprice.errors }" />
+                <div *ngIf="submitted && productData.productsaleprice.errors" class="invalid-feedback">
+                    <div *ngIf="productData.productsaleprice.errors.required">Digite valor de venda do produto</div>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <ngb-alert *ngIf="submitError" type="danger" [dismissible]="false">
+                <strong>Erro!</strong> Falha ao submeter produto.
+            </ngb-alert>
+    
+            <div class="form-group col-md-12">
+                <button [disabled]="loading" value="Teste" class="btn btn-primary btn-lg btn-block">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Salvar
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
