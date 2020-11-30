@@ -19,11 +19,14 @@ export class ProductFormComponent implements OnInit {
   loading = false;
   submitted = false;
   submitError = false;
+  loadProductError = false;
+  updateMode = false;
   
   constructor(
     private formBuilder: FormBuilder,
     private productService: ProductService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private product: Produto
   ) { }
 
   ngOnInit(): void {
@@ -33,12 +36,13 @@ export class ProductFormComponent implements OnInit {
       // Havendo um id na rota, trata-se de uma edição
       if (parameters['id']) {
         this.pageTitle = "Atualização de produto";
+        this.updateMode = true;
 
-        let product = this.loadProductData(parameters['id']);
+        this.loadProductData(parameters['id']);
 
         this.productForm = this.formBuilder.group({
-          productname: [product, Validators.required],
-          productsaleprice: ['', Validators.required]
+          productname: [this.product.Nome, Validators.required],
+          productsaleprice: [this.product.ValorVenda, Validators.required]
         }); 
       }
       else{
@@ -59,17 +63,32 @@ export class ProductFormComponent implements OnInit {
     this.submitted = true;
     this.loading = true;
     
-    this.productService.create(this.productFactory())
-    .pipe(first())
-    .subscribe(
-      data => {
-        this.loading = false
-        Swal.fire('Sucesso','Produto cadastrado com sucesso', 'success')
-      }, 
-      error => {
-        this.loading = false;
-        this.submitError = true
-      });
+    if(this.updateMode){
+      this.productService.update(this.productFactory())
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.loading = false
+          Swal.fire('Sucesso','Produto atualizado com sucesso', 'success')
+        }, 
+        error => {
+          this.loading = false;
+          this.submitError = true
+        });
+    }
+    else{
+      this.productService.create(this.productFactory())
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.loading = false
+          Swal.fire('Sucesso','Produto cadastrado com sucesso', 'success')
+        }, 
+        error => {
+          this.loading = false;
+          this.submitError = true
+        });
+    }
   }
 
   loadProductData(id: string){
@@ -77,17 +96,18 @@ export class ProductFormComponent implements OnInit {
     .pipe(first())
     .subscribe(
       data => {
-        return data;
+        this.product = data;
       }, 
       error => {
         this.loading = false;
-        this.submitError = true
+        this.loadProductError = true
       });
   }
 
   private productFactory(): Produto{
     let product = new Produto;
 
+    product.Id = this.product.Id;
     product.Nome = this.productData.productname.value;
     product.ValorVenda = parseFloat(this.productData.productsaleprice.value);
 
