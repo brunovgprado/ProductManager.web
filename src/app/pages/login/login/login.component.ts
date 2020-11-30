@@ -14,8 +14,6 @@ import { environment } from 'src/environments/environment';
 })
 export class LoginComponent implements OnInit {
 
-  public version = environment.version;
-
   loginForm: FormGroup;
   loading = false;
   submitted = false;
