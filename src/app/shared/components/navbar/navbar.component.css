@@ -1,0 +1,44 @@
+.user-info{
+    background: #074b89;
+}
+
+.user-info-content {
+    display: flex;
+    justify-content: flex-end;
+    font-size: .8rem;
+    width: 90%;
+    margin: auto;
+    color: #FFF;
+}
+
+.user-info-btn {
+    border: none;
+    outline: none;
+    font-weight: bold;
+    margin: 3px;
+    padding: 2px 5px;
+    color: #FFF;
+    background: none;
+    cursor: pointer;
+}
+
+.user-info-btn:hover {
+    background: orange;
+    border-radius: 5px;
+}
+
+.user-info-btn-container:not(:last-child) {
+    border-right: 2px dashed #fff;
+}
+
+@media(max-width: 700px) {
+    .user-info-content {
+        display: block;
+        text-align: center;
+    }
+
+    .user-info-btn-container:not(:last-child) {
+        border-right: none;
+        border-bottom: 1px solid #fff;
+    }
+}

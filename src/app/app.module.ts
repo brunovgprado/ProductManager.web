@@ -9,12 +9,15 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { PagesContainerComponent } from './shared/components/pages-container/pages-container/pages-container.component';
 import { LoginComponent } from './pages/login/login/login.component';
+import { ProductFormComponent } from './pages/product/product-form/product-form.component';
+import { NavbarComponent } from './shared/components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PagesContainerComponent,
-    LoginComponent
+    LoginComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

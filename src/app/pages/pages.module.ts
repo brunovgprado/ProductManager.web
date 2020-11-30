@@ -6,6 +6,8 @@ import { ProductDetailComponent } from './product/product-detail/product-detail.
 import { ProductListComponent } from './product/product-list/product-list.component';
 import { LoginService } from '../shared/services/login/login.service';
 import { PagesRoutingModule } from './pages-routing.module';
+import { ProductService } from '../services/product.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -17,11 +19,15 @@ import { PagesRoutingModule } from './pages-routing.module';
     ProductListComponent],
   imports: [
     CommonModule,
-    PagesRoutingModule
+    PagesRoutingModule,
+    ReactiveFormsModule
   ],
   entryComponents:[
     HomeComponent
   ],
-  providers: [LoginService]
+  providers: [
+    LoginService,
+    ProductService
+  ]
 })
 export class PagesModule { }
